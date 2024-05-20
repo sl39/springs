@@ -7,6 +7,7 @@ import com.project.site.dto.ResponseDto;
 import com.project.site.entity.Site;
 import com.project.site.respository.SiteRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,4 +35,14 @@ public class SiteService {
         return siteRepository.findAllByOrderById().stream().map(ResponseAllDto::new).toList();
     }
 
+    @Transactional
+    public ResponseDto updateContent(Long id,RequestDto requestDto) {
+        Site site = siteRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("선택하신 글은 없는 메모입니다."));
+
+        site.update(requestDto);
+        ResponseDto responseDto = new ResponseDto(site);
+        return responseDto;
+
+    }
 }

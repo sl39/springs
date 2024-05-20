@@ -33,11 +33,11 @@ public class SiteController {
         return contents;
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseDto createContent(@PathVariable Long id, @RequestBody RequestDto requestDto){
-//        ResponseDto content = siteService.updateContent(requestDto);
-//        return content;
-//    }
+    @PutMapping("/{id}")
+    public ResponseDto createContent(@PathVariable Long id, @RequestBody RequestDto requestDto){
+        ResponseDto content = siteService.updateContent(id,requestDto);
+        return content;
+    }
 
 
 }
