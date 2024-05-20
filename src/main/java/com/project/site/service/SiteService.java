@@ -37,12 +37,23 @@ public class SiteService {
 
     @Transactional
     public ResponseDto updateContent(Long id,RequestDto requestDto) {
-        Site site = siteRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("선택하신 글은 없는 메모입니다."));
+        Site site = findSite(id);
 
         site.update(requestDto);
         ResponseDto responseDto = new ResponseDto(site);
         return responseDto;
 
+    }
+
+
+    private Site findSite(Long id){
+        return siteRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("선택하신 글은 없는 메모입니다."));
+    }
+
+    public String deleteContent(Long id) {
+        Site site = findSite(id);
+        siteRepository.delete(site);
+        return "{\"msg\":\"삭제완료\"}";
     }
 }

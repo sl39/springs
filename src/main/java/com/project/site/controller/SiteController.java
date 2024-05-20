@@ -34,10 +34,13 @@ public class SiteController {
     }
 
     @PutMapping("/{id}")
-    public ResponseDto createContent(@PathVariable Long id, @RequestBody RequestDto requestDto){
+    public ResponseDto updateContent(@PathVariable Long id, @RequestBody RequestDto requestDto){
         ResponseDto content = siteService.updateContent(id,requestDto);
         return content;
     }
-
+    @DeleteMapping("/{id}")
+    public String deleteContent(@PathVariable Long id){
+        return siteService.deleteContent(id);
+    }
 
 }
